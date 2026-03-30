@@ -1,21 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ShopController;
 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 // Admin Auth Routes
 Route::get('/admin/login', [App\Http\Controllers\Admin\AdminLoginController::class, 'showLoginForm'])->name('admin.login');
@@ -47,3 +43,15 @@ Route::prefix('driver')->name('delivery.')->group(function () {
         Route::post('/order/{order}/status', [App\Http\Controllers\DeliveryController::class, 'updateStatus'])->name('order.update');
     });
 });
+// Home
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+// Products
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/products/{slug}', [ProductController::class, 'show'])->name('products.show');
+
+// Static / Info pages
+Route::get('/customized-cakes', [ShopController::class, 'customized'])->name('customized');
+Route::get('/delivery', [ShopController::class, 'delivery'])->name('delivery');
+Route::get('/contact', [ShopController::class, 'contact'])->name('contact');
+Route::post('/contact', [ShopController::class, 'contactSubmit'])->name('contact.submit');
