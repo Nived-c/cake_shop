@@ -6,8 +6,8 @@
 
 @section('content')
 <div class="data-table">
-    <div style="padding:20px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #EDE8EA;">
-        <div class="font-serif-elegant text-xl font-bold" style="color:var(--text-dark);">Current Deliveries</div>
+    <div style="padding:20px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.05);">
+        <div class="font-serif-elegant text-xl font-bold" style="color:var(--primary);">Current Deliveries</div>
         <div style="font-size:0.85em;color:var(--text-light);">{{ $deliveries->total() }} total tracking</div>
     </div>
     <table>
@@ -28,7 +28,7 @@
                     @if($order->deliveryBoy)
                         <div style="font-weight:600;"><i class="fa-solid fa-motorcycle text-gray-400 mr-1 text-xs"></i> {{ $order->deliveryBoy->name }}</div>
                     @else
-                        <span style="font-size:0.75rem;color:var(--text-light);background:#f1f5f9;padding:4px 8px;border-radius:4px;">Unassigned</span>
+                        <span style="font-size:0.75rem;color:var(--text-light);background:rgba(255,255,255,0.05);padding:4px 8px;border-radius:4px;">Unassigned</span>
                     @endif
                 </td>
                 <td style="vertical-align:top;">
@@ -78,7 +78,7 @@
     </table>
     
     @if($deliveries->hasPages())
-    <div style="padding:15px 24px; border-top:1px solid #EDE8EA;">
+    <div style="padding:15px 24px; border-top:1px solid rgba(255,255,255,0.05);">
         {{ $deliveries->links() }}
     </div>
     @endif

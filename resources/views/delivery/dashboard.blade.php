@@ -11,27 +11,29 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
+    <style>
         :root {
-            --primary: #D48B96;
-            --dark: #2F2A32;
-            --bg: #F8FAFC;
+            --primary: #B2915F;
+            --dark: #050505;
+            --bg: #121212;
+            --text-dark: #F5F0E6;
         }
 
         body {
             font-family: 'Outfit', sans-serif;
             background-color: var(--bg);
-            color: #334155;
+            color: var(--text-dark);
             margin: 0;
             padding-bottom: 80px; /* Space for mobile nav */
         }
 
         .header {
-            background: white;
+            background: var(--dark);
             padding: 16px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
             position: sticky;
             top: 0;
             z-index: 50;
@@ -40,7 +42,7 @@
         .profile-img {
             width: 40px; height: 40px;
             border-radius: 50%;
-            background: rgba(212, 139, 150, 0.15);
+            background: rgba(178, 145, 95, 0.15);
             color: var(--primary);
             display: flex; align-items: center; justify-content: center;
             font-size: 1.2rem;
@@ -51,22 +53,23 @@
             color: white;
             margin: 20px;
             padding: 24px;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px -5px rgba(47, 42, 50, 0.3);
+            border-radius: 4px;
+            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
             display: flex;
             justify-content: space-between;
         }
 
-        .stat-block h3 { font-size: 2rem; font-weight: 800; line-height: 1; margin-bottom: 4px; }
-        .stat-block p { font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+        .stat-block h3 { font-size: 2rem; font-weight: 800; line-height: 1; margin-bottom: 4px; color: var(--primary); }
+        .stat-block p { font-size: 0.75rem; color: #a09d94; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
 
         .order-card {
-            background: white;
-            border-radius: 16px;
+            background: var(--dark);
+            border-radius: 4px;
             margin: 0 20px 20px;
             padding: 20px;
-            box-shadow: 0 4px 12px -2px rgba(0,0,0,0.04);
-            border: 1px solid #f1f5f9;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.05);
             transition: all 0.3s;
         }
         
@@ -78,14 +81,14 @@
             text-transform: uppercase;
         }
 
-        .status-pending { background: #fef3c7; color: #b45309; }
-        .status-processing { background: #e0e7ff; color: #4338ca; }
-        .status-transit { background: #dbeafe; color: #1d4ed8; }
+        .status-pending { background: rgba(232, 160, 0, 0.2); color: #E8A000; }
+        .status-processing { background: rgba(57, 73, 171, 0.2); color: #5C6BC0; }
+        .status-transit { background: rgba(46, 125, 50, 0.2); color: #4CAF50; }
 
         .btn-action {
             width: 100%;
             padding: 12px;
-            border-radius: 12px;
+            border-radius: 4px;
             font-weight: 600;
             text-align: center;
             margin-top: 10px;
@@ -98,20 +101,20 @@
             gap: 8px;
         }
 
-        .btn-primary { background: var(--primary); color: white; }
-        .btn-success { background: #10b981; color: white; }
-        .btn-danger { background: #fef2f2; color: #ef4444; border: 1px solid #fecaca; }
+        .btn-primary { background: var(--primary); color: #000; }
+        .btn-success { background: #4CAF50; color: white; }
+        .btn-danger { background: rgba(239, 68, 68, 0.1); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); }
 
         .modal-overlay {
             position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.5); backdrop-filter: blur(4px);
+            background: rgba(0,0,0,0.7); backdrop-filter: blur(4px);
             z-index: 100; display: hidden;
             align-items: flex-end; justify-content: center;
         }
 
         .modal-content {
-            background: white; width: 100%; border-radius: 24px 24px 0 0;
-            padding: 30px 20px;
+            background: var(--dark); width: 100%; border-radius: 20px 20px 0 0;
+            padding: 30px 20px; border-top: 1px solid rgba(255,255,255,0.1);
             transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -119,11 +122,11 @@
         .modal-overlay.active .modal-content { transform: translateY(0); }
 
         .reason-input {
-            width: 100%; padding: 14px; border-radius: 12px;
-            border: 1.5px solid #e2e8f0; background: #f8fafc;
-            margin-bottom: 16px; font-family: 'Outfit'; outline: none;
+            width: 100%; padding: 14px; border-radius: 4px;
+            border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.02);
+            margin-bottom: 16px; font-family: 'Outfit'; outline: none; color: var(--text-dark);
         }
-        .reason-input:focus { border-color: var(--primary); background: white; }
+        .reason-input:focus { border-color: var(--primary); background: rgba(18,18,18,0.9); }
     </style>
 </head>
 <body>
@@ -133,12 +136,12 @@
             <div class="profile-img"><i class="fa-solid fa-motorcycle"></i></div>
             <div>
                 <h1 class="font-bold text-lg leading-tight">{{ Auth::user()->name }}</h1>
-                <p class="text-xs text-gray-500 font-medium">Delivery Partner</p>
+                <p class="text-xs text-gray-500 font-medium" style="color:var(--primary);">Delivery Partner</p>
             </div>
         </div>
         <form method="POST" action="{{ route('delivery.logout') }}">
             @csrf
-            <button class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:text-red-500 hover:bg-red-50 transition-colors">
+            <button class="w-10 h-10 rounded-full flex items-center justify-center text-gray-400 hover:text-red-500" style="background: rgba(255,255,255,0.05);">
                 <i class="fa-solid fa-arrow-right-from-bracket"></i>
             </button>
         </form>
@@ -158,20 +161,20 @@
     </div>
 
     <div class="px-5 mb-4 flex justify-between items-end">
-        <h2 class="text-lg font-bold">Your Deliveries</h2>
-        <span class="text-xs font-semibold text-gray-500 uppercase tracking-wider">{{ now()->format('M d, Y') }}</span>
+        <h2 class="text-lg font-bold" style="color: var(--primary);">Your Deliveries</h2>
+        <span class="text-xs font-semibold uppercase tracking-wider text-gray-400">{{ now()->format('M d, Y') }}</span>
     </div>
 
     @forelse($orders as $order)
         <div class="order-card" id="card-{{ $order->id }}">
-            <div class="flex justify-between items-start border-b border-gray-100 pb-4 mb-4">
+            <div class="flex justify-between items-start border-b pb-4 mb-4" style="border-color: rgba(255,255,255,0.05);">
                 <div>
-                    <h3 class="font-bold text-lg text-gray-800">#{{ $order->order_number }}</h3>
-                    <p class="text-sm font-medium text-gray-500">
+                    <h3 class="font-bold text-lg text-white">#{{ $order->order_number }}</h3>
+                    <p class="text-sm font-medium text-gray-400">
                         @if($order->status == 'Pending' || $order->status == 'Processing')
                             <i class="fa-regular fa-clock mr-1"></i> Due {{ \Carbon\Carbon::parse($order->delivery_date)->format('M d') }} • {{ $order->delivery_time_slot }}
                         @else
-                            <i class="fa-solid fa-motorcycle mr-1 text-blue-500"></i> Active Delivery
+                            <i class="fa-solid fa-motorcycle mr-1" style="color:var(--primary);"></i> Active Delivery
                         @endif
                     </p>
                 </div>
@@ -185,27 +188,27 @@
 
             <div class="mb-5">
                 <div class="flex items-start gap-3 mb-3">
-                    <div class="w-8 h-8 rounded-full bg-pink-50 flex items-center justify-center text-pink-500 shrink-0 mt-1">
+                    <div class="w-8 h-8 rounded-full flex items-center justify-center shrink-0 mt-1" style="background:rgba(178,145,95,0.1); color:var(--primary);">
                         <i class="fa-solid fa-location-dot"></i>
                     </div>
                     <div>
-                        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Deliver To</p>
-                        <p class="font-bold text-gray-800">{{ optional($order->user)->name }}</p>
-                        <p class="text-sm text-gray-600 leading-snug">{{ $order->shipping_address }}</p>
+                        <p class="text-xs font-bold uppercase tracking-widest mb-1" style="color:var(--primary);">Deliver To</p>
+                        <p class="font-bold text-white">{{ optional($order->user)->name }}</p>
+                        <p class="text-sm leading-snug text-gray-400">{{ $order->shipping_address }}</p>
                     </div>
                 </div>
 
                 <div class="flex items-start gap-3">
-                    <div class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-500 shrink-0 mt-1">
+                    <div class="w-8 h-8 rounded-full flex items-center justify-center shrink-0 mt-1" style="background:rgba(255,255,255,0.05); color:var(--text-dark);">
                         <i class="fa-solid fa-box"></i>
                     </div>
                     <div>
-                        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Items (Total: ${{ $order->total_amount }})</p>
-                        <p class="text-sm font-medium text-gray-700">
+                        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Items (Total: AED {{ $order->total_amount }})</p>
+                        <p class="text-sm font-medium text-gray-300">
                             @if($order->items->count() > 0)
                                 {{ $order->items->first()->quantity }}x {{ optional($order->items->first()->product)->name }}
                                 @if($order->items->count() > 1)
-                                    <span class="text-gray-400 text-xs ml-1">+{{ $order->items->count() - 1 }} more item(s)</span>
+                                    <span class="text-gray-500 text-xs ml-1">+{{ $order->items->count() - 1 }} more item(s)</span>
                                 @endif
                             @else
                                 No items listed.
@@ -238,12 +241,12 @@
 
         </div>
     @empty
-        <div class="text-center p-10 bg-white mx-5 rounded-2xl border border-dashed border-gray-300">
-            <div class="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4 text-gray-300 text-2xl">
+        <div class="text-center p-10 mx-5 rounded-md border border-dashed" style="background:var(--dark); border-color:rgba(255,255,255,0.1);">
+            <div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl" style="background:rgba(255,255,255,0.05); color:var(--text-dark);">
                 <i class="fa-solid fa-mug-hot"></i>
             </div>
-            <h3 class="font-bold text-gray-800 text-lg mb-1">All Caught Up!</h3>
-            <p class="text-sm text-gray-500 leading-relaxed font-medium">You have no active deliveries assigned to you right now. Take a break.</p>
+            <h3 class="font-bold text-white text-lg mb-1">All Caught Up!</h3>
+            <p class="text-sm text-gray-400 leading-relaxed font-medium">You have no active deliveries assigned to you right now. Take a break.</p>
         </div>
     @endforelse
 
@@ -251,8 +254,8 @@
     <div class="modal-overlay hidden" id="reasonModal">
         <div class="modal-content">
             <div class="flex justify-between items-center mb-6">
-                <h3 class="font-bold text-xl text-dark" id="modalTitle">Report Issue</h3>
-                <button onclick="closeModal()" class="w-8 h-8 bg-gray-100 rounded-full text-gray-500 font-bold"><i class="fa-solid fa-times"></i></button>
+                <h3 class="font-bold text-xl text-white" id="modalTitle">Report Issue</h3>
+                <button onclick="closeModal()" class="w-8 h-8 rounded-full text-gray-400 font-bold" style="background: rgba(255,255,255,0.05);"><i class="fa-solid fa-times"></i></button>
             </div>
             
             <p class="text-sm text-gray-500 font-medium mb-3">Please provide a reason for the update. This will be sent immediately to the store manager.</p>

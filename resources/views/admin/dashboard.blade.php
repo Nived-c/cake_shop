@@ -9,10 +9,10 @@
 
     <div class="stat-card">
         <div class="flex items-center justify-between mb-4">
-            <div class="stat-icon" style="background:#FFF0F2;">
-                <i class="fa-solid fa-truck-fast" style="color:var(--primary);"></i>
+            <div class="stat-icon">
+                <i class="fa-solid fa-truck-fast"></i>
             </div>
-            <span style="font-size:0.75rem;font-weight:600;color:var(--text-light);background:#F5F0F2;padding:4px 10px;border-radius:50px;">Overall</span>
+            <span style="font-size:0.75rem;font-weight:600;color:var(--primary);background:rgba(178,145,95,0.1);padding:4px 10px;border-radius:50px;">Overall</span>
         </div>
         <div style="font-size:2rem;font-weight:700;color:var(--text-dark);line-height:1;">{{ $totalDeliveries }}</div>
         <div style="font-size:0.82rem;color:var(--text-light);margin-top:4px;">Total Deliveries</div>
@@ -20,10 +20,10 @@
 
     <div class="stat-card">
         <div class="flex items-center justify-between mb-4">
-            <div class="stat-icon" style="background:#FFF8E1;">
-                <i class="fa-solid fa-clock" style="color:#E8A000;"></i>
+            <div class="stat-icon">
+                <i class="fa-solid fa-clock" style="color:#E8A000 !important;"></i>
             </div>
-            <span style="font-size:0.75rem;font-weight:600;color:#E8A000;background:#FFF8E1;padding:4px 10px;border-radius:50px;">Live</span>
+            <span style="font-size:0.75rem;font-weight:600;color:#E8A000;background:rgba(232,160,0,0.1);padding:4px 10px;border-radius:50px;">Live</span>
         </div>
         <div style="font-size:2rem;font-weight:700;color:var(--text-dark);line-height:1;">{{ $pendingDeliveries }}</div>
         <div style="font-size:0.82rem;color:var(--text-light);margin-top:4px;">Pending Deliveries</div>
@@ -31,10 +31,10 @@
 
     <div class="stat-card">
         <div class="flex items-center justify-between mb-4">
-            <div class="stat-icon" style="background:#E8F5E9;">
-                <i class="fa-solid fa-circle-check" style="color:#2E7D32;"></i>
+            <div class="stat-icon">
+                <i class="fa-solid fa-circle-check" style="color:#4CAF50 !important;"></i>
             </div>
-            <span style="font-size:0.75rem;font-weight:600;color:#2E7D32;background:#E8F5E9;padding:4px 10px;border-radius:50px;">Done</span>
+            <span style="font-size:0.75rem;font-weight:600;color:#4CAF50;background:rgba(76,175,80,0.1);padding:4px 10px;border-radius:50px;">Done</span>
         </div>
         <div style="font-size:2rem;font-weight:700;color:var(--text-dark);line-height:1;">{{ $completedDeliveries }}</div>
         <div style="font-size:0.82rem;color:var(--text-light);margin-top:4px;">Completed</div>
@@ -42,10 +42,10 @@
 
     <div class="stat-card">
         <div class="flex items-center justify-between mb-4">
-            <div class="stat-icon" style="background:#E8EAF6;">
-                <i class="fa-solid fa-bag-shopping" style="color:#3949AB;"></i>
+            <div class="stat-icon">
+                <i class="fa-solid fa-bag-shopping" style="color:#5C6BC0 !important;"></i>
             </div>
-            <span style="font-size:0.75rem;font-weight:600;color:#3949AB;background:#E8EAF6;padding:4px 10px;border-radius:50px;">Today</span>
+            <span style="font-size:0.75rem;font-weight:600;color:#5C6BC0;background:rgba(92,107,192,0.1);padding:4px 10px;border-radius:50px;">Today</span>
         </div>
         <div style="font-size:2rem;font-weight:700;color:var(--text-dark);line-height:1;">{{ $newOrdersToday }}</div>
         <div style="font-size:0.82rem;color:var(--text-light);margin-top:4px;">New Orders</div>
@@ -54,8 +54,8 @@
 
 <!-- Recent Deliveries Table -->
 <div class="data-table">
-    <div style="padding:20px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #EDE8EA;">
-        <div class="font-serif-elegant text-xl font-bold" style="color:var(--text-dark);">Recent Orders</div>
+    <div style="padding:20px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.05);">
+        <div class="font-serif-elegant text-xl font-bold" style="color:var(--primary);">Recent Orders</div>
         <a href="{{ route('admin.orders.index') }}" style="font-size:0.82rem;font-weight:600;color:var(--primary);">View All <i class="fa-solid fa-arrow-right ml-1 text-xs"></i></a>
     </div>
     <table>

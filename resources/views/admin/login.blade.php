@@ -6,7 +6,7 @@
     <title>Admin Login | L'Atelier Confections</title>
 
     <!-- Same Fonts as Template -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@400;600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
@@ -16,12 +16,12 @@
 
     <style>
         :root {
-            --primary: #D48B96;
-            --primary-dark: #C6727E;
-            --text-dark: #2F2A32;
-            --text-light: #675D6E;
-            --bg-offwhite: #FDFCFB;
-            --accent-gold: #D4AF37;
+            --primary: #B2915F; /* Muted Gold */
+            --primary-dark: #8c7148;
+            --text-dark: #F5F0E6; /* Light text for dark bg */
+            --text-light: #A09D94;
+            --bg-offwhite: #121212;
+            --bg-darker: #050505;
         }
 
         * { box-sizing: border-box; }
@@ -36,11 +36,11 @@
             flex-direction: column;
         }
 
-        .font-serif-elegant { font-family: 'Playfair Display', serif; }
+        .font-serif-elegant { font-family: 'Cormorant Garamond', serif; }
 
-        /* Left panel – mirrors template's promo-1 gradient */
+        /* Left panel */
         .login-panel-left {
-            background: linear-gradient(145deg, #FFE8EB 0%, #FDF0F2 50%, #F5E6E8 100%);
+            background: var(--bg-darker);
             position: relative;
             overflow: hidden;
         }
@@ -51,7 +51,7 @@
             width: 400px;
             height: 400px;
             border-radius: 50%;
-            background: rgba(212, 139, 150, 0.12);
+            background: rgba(178, 145, 95, 0.05);
             top: -100px;
             right: -100px;
         }
@@ -62,57 +62,55 @@
             width: 280px;
             height: 280px;
             border-radius: 50%;
-            background: rgba(212, 139, 150, 0.10);
+            background: rgba(178, 145, 95, 0.03);
             bottom: -80px;
             left: -60px;
         }
 
-        /* Glass card – same as template's glass-search style */
+        /* Glass card */
         .glass-card {
-            background: rgba(255, 255, 255, 0.75);
+            background: rgba(18, 18, 18, 0.75);
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(212, 139, 150, 0.15);
-            box-shadow: 0 25px 50px -12px rgba(212, 139, 150, 0.18),
-                        0 8px 20px -4px rgba(47, 42, 50, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5),
+                        0 8px 20px -4px rgba(0, 0, 0, 0.3);
         }
 
         /* Input styling matching template */
         .form-input {
             width: 100%;
-            border: 1.5px solid #EDE8EA;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 12px;
             padding: 14px 18px 14px 48px;
             font-family: 'Outfit', sans-serif;
             font-size: 0.9rem;
             color: var(--text-dark);
-            background: rgba(255,255,255,0.8);
+            background: rgba(255,255,255,0.02);
             transition: all 0.3s ease;
             outline: none;
         }
 
         .form-input:focus {
             border-color: var(--primary);
-            background: white;
-            box-shadow: 0 0 0 4px rgba(212, 139, 150, 0.12);
+            background: rgba(18, 18, 18, 0.9);
+            box-shadow: 0 0 0 4px rgba(178, 145, 95, 0.12);
         }
 
         .form-input::placeholder {
-            color: #B8ADB5;
+            color: #555;
             font-weight: 400;
         }
 
-        /* Primary button – matches template's dark pill button */
+        /* Primary button */
         .btn-primary {
-            background: var(--text-dark);
-            color: white;
+            background: var(--primary);
+            color: #000;
             border: none;
             border-radius: 50px;
             padding: 15px 32px;
             font-family: 'Outfit', sans-serif;
             font-size: 0.95rem;
             font-weight: 600;
-            letter-spacing: 0.03em;
             cursor: pointer;
             width: 100%;
             transition: all 0.3s ease;
@@ -121,23 +119,22 @@
         .btn-primary:hover {
             background: var(--primary-dark);
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px -5px rgba(198, 114, 126, 0.45);
         }
 
         .btn-primary:active {
             transform: translateY(0);
         }
 
-        /* Circle badge – same as category items in template */
+        /* Circle badge */
         .icon-circle {
             width: 48px;
             height: 48px;
             border-radius: 50%;
-            background: var(--primary);
+            background: rgba(178, 145, 95, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 8px 20px -4px rgba(212, 139, 150, 0.5);
+            color: var(--primary);
         }
 
         /* Input wrapper */
@@ -154,17 +151,19 @@
             font-size: 0.95rem;
         }
 
-        /* Decorative cake circles – same circle-card style */
+        /* Decorative cake circles */
         .deco-circle {
             border-radius: 50%;
             overflow: hidden;
-            border: 4px solid rgba(255,255,255,0.6);
-            box-shadow: 0 15px 30px -6px rgba(212, 139, 150, 0.25);
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 15px 30px -6px rgba(0, 0, 0, 0.5);
         }
 
         /* Notice bar same as template */
         .notice-bar {
-            background-color: var(--primary);
+            background-color: var(--bg-darker);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            color: var(--primary);
         }
 
         /* Back link hover – same as template's nav links */
@@ -196,12 +195,12 @@
             content: '';
             flex: 1;
             height: 1px;
-            background: #EDE8EA;
+            background: rgba(255,255,255,0.05);
         }
 
         .divider span {
             font-size: 0.78rem;
-            color: #C4B8BC;
+            color: var(--text-light);
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 0.08em;

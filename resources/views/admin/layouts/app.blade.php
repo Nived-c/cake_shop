@@ -5,32 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', 'Admin Dashboard') | L'Atelier Confections</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@400;600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
-            --primary: #D48B96;
-            --primary-dark: #C6727E;
-            --text-dark: #2F2A32;
-            --text-light: #675D6E;
-            --bg-offwhite: #FDFCFB;
+            --primary: #B2915F; /* Muted Gold */
+            --primary-dark: #8c7148;
+            --text-dark: #F5F0E6; /* Light text for dark bg */
+            --text-light: #A09D94;
+            --bg-offwhite: #121212;
+            --bg-darker: #050505;
         }
 
         body {
             font-family: 'Outfit', sans-serif;
-            background-color: #F5F0F2;
+            background-color: var(--bg-darker);
             color: var(--text-dark);
             margin: 0;
         }
 
-        .font-serif-elegant { font-family: 'Playfair Display', serif; }
+        .font-serif-elegant { font-family: 'Cormorant Garamond', serif; }
 
         /* Sidebar */
         .sidebar {
             width: 260px;
-            background: var(--text-dark);
+            background: var(--bg-offwhite);
+            border-right: 1px solid rgba(255,255,255,0.05);
             min-height: 100vh;
             position: fixed;
             left: 0; top: 0; bottom: 0;
@@ -41,7 +43,7 @@
 
         .sidebar-logo {
             padding: 28px 24px;
-            border-bottom: 1px solid rgba(255,255,255,0.07);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
         .nav-item {
@@ -59,7 +61,7 @@
         }
 
         .nav-item:hover, .nav-item.active {
-            background: rgba(212, 139, 150, 0.18);
+            background: rgba(178, 145, 95, 0.18);
             color: var(--primary);
         }
 
@@ -82,8 +84,8 @@
 
         /* Topbar */
         .topbar {
-            background: white;
-            border-bottom: 1px solid #EDE8EA;
+            background: var(--bg-offwhite);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
             padding: 16px 32px;
             display: flex;
             align-items: center;
@@ -95,16 +97,17 @@
 
         /* Stat cards */
         .stat-card {
-            background: white;
+            background: var(--bg-offwhite);
             border-radius: 20px;
             padding: 24px;
-            box-shadow: 0 4px 12px -2px rgba(47, 42, 50, 0.06);
+            border: 1px solid rgba(255,255,255,0.05);
             transition: all 0.3s ease;
         }
 
         .stat-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 12px 25px -5px rgba(212, 139, 150, 0.18);
+            border-color: var(--primary);
+            box-shadow: 0 12px 25px -5px rgba(178, 145, 95, 0.18);
         }
 
         .stat-icon {
@@ -115,14 +118,16 @@
             align-items: center;
             justify-content: center;
             font-size: 1.2rem;
+            background: rgba(178, 145, 95, 0.1) !important;
+            color: var(--primary) !important;
         }
 
         /* Table */
         .data-table {
-            background: white;
+            background: var(--bg-offwhite);
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 4px 12px -2px rgba(47, 42, 50, 0.06);
+            border: 1px solid rgba(255,255,255,0.05);
         }
 
         .data-table table {
@@ -131,26 +136,34 @@
         }
 
         .data-table th {
-            background: #FAF6F7;
+            background: rgba(255,255,255,0.02);
             padding: 14px 20px;
             text-align: left;
             font-size: 0.75rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.08em;
-            color: var(--text-light);
-            border-bottom: 1px solid #EDE8EA;
+            color: var(--primary);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
         .data-table td {
             padding: 16px 20px;
             font-size: 0.88rem;
-            border-bottom: 1px solid #F5F0F2;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            color: var(--text-dark);
+            background: transparent !important;
+        }
+        
+        /* Select and inputs in tables */
+        .data-table select, .data-table input {
+            background: var(--bg-darker);
+            border: 1px solid rgba(255,255,255,0.1);
             color: var(--text-dark);
         }
 
         .data-table tr:last-child td { border-bottom: none; }
-        .data-table tr:hover td { background: #FDF8F9; }
+        .data-table tr:hover td { background: rgba(255,255,255,0.02) !important; }
 
         /* Status badges */
         .badge {
@@ -163,10 +176,10 @@
             font-weight: 600;
         }
 
-        .badge-pending    { background: #FFF8E1; color: #E8A000; }
-        .badge-delivered  { background: #E8F5E9; color: #2E7D32; }
-        .badge-processing { background: #E8EAF6; color: #3949AB; }
-        .badge-cancelled  { background: #FFEBEE; color: #C62828; }
+        .badge-pending    { background: rgba(232, 160, 0, 0.2); color: #E8A000; }
+        .badge-delivered  { background: rgba(46, 125, 50, 0.2); color: #4CAF50; }
+        .badge-processing { background: rgba(57, 73, 171, 0.2); color: #5C6BC0; }
+        .badge-cancelled  { background: rgba(198, 40, 40, 0.2); color: #EF5350; }
 
         /* Logout btn */
         .btn-logout {
@@ -175,7 +188,7 @@
             gap: 8px;
             padding: 9px 20px;
             border-radius: 50px;
-            background: rgba(212, 139, 150, 0.12);
+            background: rgba(178, 145, 95, 0.12);
             color: var(--primary);
             font-weight: 600;
             font-size: 0.85rem;
@@ -185,7 +198,7 @@
 
         .btn-logout:hover {
             background: var(--primary);
-            color: white;
+            color: #000;
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -263,7 +276,7 @@
         <!-- Topbar -->
         <div class="topbar">
             <div>
-                <h1 class="font-serif-elegant text-2xl font-bold" style="color:var(--text-dark);">@yield('header_title', 'Dashboard')</h1>
+                <h1 class="font-serif-elegant text-2xl font-bold" style="color:var(--primary);">@yield('header_title', 'Dashboard')</h1>
                 <p style="font-size:0.8rem;color:var(--text-light);margin:0;">
                     @yield('header_subtitle', 'Welcome back, ' . session('admin_name', 'Admin') . ' • ' . now()->format('l, d M Y'))
                 </p>
@@ -273,7 +286,7 @@
                     $unreadCount = \App\Models\User::where('role', 'admin')->first()?->unreadNotifications->count() ?? 0;
                 @endphp
                 <div style="position:relative;cursor:pointer;">
-                    <div style="width:40px;height:40px;border-radius:50%;background:#F5F0F2;display:flex;align-items:center;justify-content:center;color:var(--text-light);">
+                    <div style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;color:var(--text-light);">
                         <i class="fa-regular fa-bell"></i>
                     </div>
                     @if($unreadCount > 0)
