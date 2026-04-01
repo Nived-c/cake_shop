@@ -220,6 +220,12 @@
             transition: border-color 0.3s;
         }
         input:focus, select:focus, textarea:focus { border-color: var(--color-accent); }
+        
+        /* Fix select options for dark theme */
+        select option {
+            background-color: var(--color-bg-light) !important;
+            color: var(--color-text) !important;
+        }
 
         /* ===== FOOTER ===== */
         footer {

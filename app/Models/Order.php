@@ -17,6 +17,7 @@ class Order extends Model
         'delivery_date',
         'delivery_time_slot',
         'shipping_address',
+        'customer_phone',
     ];
 
     public function user()

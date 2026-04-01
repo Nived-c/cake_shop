@@ -43,13 +43,13 @@
                     @elseif($order->status === 'Processing')
                         <span class="badge badge-processing"><i class="fa-solid fa-circle text-xs"></i> Processing</span>
                     @elseif($order->status === 'Picked Up')
-                        <span class="badge" style="background:#e0e7ff; color:#4338ca;"><i class="fa-solid fa-box text-xs"></i> Picked Up</span>
+                        <span class="badge badge-pickedup"><i class="fa-solid fa-box text-xs"></i> Picked Up</span>
                     @elseif($order->status === 'On the Way')
-                        <span class="badge" style="background:#dbeafe; color:#1d4ed8;"><i class="fa-solid fa-truck-fast text-xs"></i> Transit</span>
+                        <span class="badge badge-transit"><i class="fa-solid fa-truck-fast text-xs"></i> Transit</span>
                     @elseif($order->status === 'Delivered')
                         <span class="badge badge-delivered"><i class="fa-solid fa-check text-xs"></i> Delivered</span>
                     @elseif($order->status === 'Delayed')
-                        <span class="badge" style="background:#FFEBEE; color:#C62828;"><i class="fa-solid fa-clock-rotate-left text-xs"></i> Delayed</span>
+                        <span class="badge badge-delayed"><i class="fa-solid fa-clock-rotate-left text-xs"></i> Delayed</span>
                     @elseif($order->status === 'Not Delivered')
                         <span class="badge badge-cancelled"><i class="fa-solid fa-ban text-xs"></i> Failed Delivery</span>
                     @else

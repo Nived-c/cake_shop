@@ -176,10 +176,37 @@
             font-weight: 600;
         }
 
-        .badge-pending    { background: rgba(232, 160, 0, 0.2); color: #E8A000; }
-        .badge-delivered  { background: rgba(46, 125, 50, 0.2); color: #4CAF50; }
-        .badge-processing { background: rgba(57, 73, 171, 0.2); color: #5C6BC0; }
-        .badge-cancelled  { background: rgba(198, 40, 40, 0.2); color: #EF5350; }
+        /* Status badges */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge-pending    { background: rgba(232, 160, 0, 0.15) !important; color: #FFB300 !important; border: 1px solid rgba(232, 160, 0, 0.2); }
+        .badge-delivered  { background: rgba(46, 125, 50, 0.15) !important; color: #66BB6A !important; border: 1px solid rgba(46, 125, 50, 0.2); }
+        .badge-processing { background: rgba(57, 73, 171, 0.15) !important; color: #7986CB !important; border: 1px solid rgba(57, 73, 171, 0.2); }
+        .badge-cancelled  { background: rgba(198, 40, 40, 0.15) !important; color: #EF5350 !important; border: 1px solid rgba(198, 40, 40, 0.2); }
+        .badge-transit    { background: rgba(2, 132, 199, 0.15) !important; color: #38BDF8 !important; border: 1px solid rgba(2, 132, 199, 0.2); }
+        .badge-delayed    { background: rgba(220, 38, 38, 0.15) !important; color: #F87171 !important; border: 1px solid rgba(220, 38, 38, 0.2); }
+        .badge-pickedup   { background: rgba(99, 102, 241, 0.15) !important; color: #818CF8 !important; border: 1px solid rgba(99, 102, 241, 0.2); }
+
+        /* Fix select options for dark theme */
+        select option {
+            background-color: #1A1A1A !important;
+            color: #F5F0E6 !important;
+            padding: 10px;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: var(--primary) !important;
+            box-shadow: 0 0 0 2px rgba(178, 145, 95, 0.2);
+        }
 
         /* Logout btn */
         .btn-logout {

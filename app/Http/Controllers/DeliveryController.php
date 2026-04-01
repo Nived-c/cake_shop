@@ -71,7 +71,16 @@ class DeliveryController extends Controller
             ->orderBy('delivery_date', 'asc')
             ->get();
 
-        return view('delivery.dashboard', compact('orders'));
+        // Work reports stats
+        $stats = [
+            'total_delivered' => Order::where('delivery_boy_id', $driverId)->where('status', 'Delivered')->count(),
+            'monthly_delivered' => Order::where('delivery_boy_id', $driverId)->where('status', 'Delivered')->whereMonth('updated_at', now()->month)->whereYear('updated_at', now()->year)->count(),
+            'today_delivered' => Order::where('delivery_boy_id', $driverId)->where('status', 'Delivered')->whereDate('updated_at', today())->count(),
+            'active_count' => Order::where('delivery_boy_id', $driverId)->whereNotIn('status', ['Delivered', 'Cancelled', 'Not Delivered'])->count(),
+            'delayed_count' => Order::where('delivery_boy_id', $driverId)->where('status', 'Delayed')->count(),
+        ];
+
+        return view('delivery.dashboard', compact('orders', 'stats'));
     }
 
     /**

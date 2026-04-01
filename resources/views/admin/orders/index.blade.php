@@ -42,7 +42,7 @@
                     <form method="POST" action="{{ route('admin.orders.update', $order->id) }}" style="display:flex;flex-direction:column;gap:8px;">
                         @csrf
                         <div style="display:flex;gap:8px;">
-                            <select name="status" class="form-control" style="flex:1;padding:6px 10px;border-radius:6px;border:1px solid rgba(255,255,255,0.1);font-size:0.8rem;color:var(--text-dark);background:{{ $order->status == 'Delivered' ? 'rgba(46, 125, 50, 0.2)' : ($order->status == 'Delayed' ? 'rgba(198, 40, 40, 0.2)' : 'var(--bg-darker)') }};">
+                            <select name="status" class="form-control" style="flex:1;padding:6px 10px;border-radius:6px;border:1px solid rgba(255,255,255,0.1);font-size:0.8rem;color:white;background:{{ $order->status == 'Delivered' ? '#1B5E20' : ($order->status == 'Delayed' ? '#B71C1C' : ($order->status == 'Picked Up' ? '#3949AB' : 'var(--bg-darker)')) }};">
                                 <option value="Pending" {{ $order->status == 'Pending' ? 'selected' : '' }}>Pending</option>
                                 <option value="Processing" {{ $order->status == 'Processing' ? 'selected' : '' }}>Processing</option>
                                 <option value="Picked Up" {{ $order->status == 'Picked Up' ? 'selected' : '' }}>Picked Up</option>

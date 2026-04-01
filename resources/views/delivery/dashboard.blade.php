@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-    <style>
         :root {
             --primary: #B2915F;
             --dark: #050505;
@@ -81,9 +80,9 @@
             text-transform: uppercase;
         }
 
-        .status-pending { background: rgba(232, 160, 0, 0.2); color: #E8A000; }
-        .status-processing { background: rgba(57, 73, 171, 0.2); color: #5C6BC0; }
-        .status-transit { background: rgba(46, 125, 50, 0.2); color: #4CAF50; }
+        .status-pending { background: rgba(232, 160, 0, 0.15); color: #FFB300; border: 1px solid rgba(232, 160, 0, 0.2); }
+        .status-processing { background: rgba(57, 73, 171, 0.15); color: #7986CB; border: 1px solid rgba(57, 73, 171, 0.2); }
+        .status-transit { background: rgba(46, 125, 50, 0.15); color: #66BB6A; border: 1px solid rgba(46, 125, 50, 0.2); }
 
         .btn-action {
             width: 100%;
@@ -127,6 +126,14 @@
             margin-bottom: 16px; font-family: 'Outfit'; outline: none; color: var(--text-dark);
         }
         .reason-input:focus { border-color: var(--primary); background: rgba(18,18,18,0.9); }
+
+        /* Custom utility classes to replace Tailwind v3 arbitrary values */
+        .bg-gradient-premium { background: linear-gradient(to bottom right, #1A1A1A, #0A0A0A); }
+        .border-premium { border-color: rgba(255,255,255,0.05); border-width: 1px; }
+        .bg-premium-light { background-color: rgba(255,255,255,0.05); }
+        .text-primary-accent { color: #F59E0B; }
+        .bg-primary-accent { background-color: #F59E0B; }
+        .text-xxs { font-size: 10px; }
     </style>
 </head>
 <body>
@@ -147,16 +154,60 @@
         </form>
     </header>
 
+    <!-- Performance Snapshot -->
+    <div class="px-5 mt-4 mb-2 flex justify-between items-end">
+        <h2 class="text-sm font-bold uppercase tracking-widest text-gray-500">Status Snapshot</h2>
+    </div>
     <div class="driver-stats">
         <div class="stat-block">
-            <h3>{{ $orders->count() }}</h3>
-            <p>Active Routes</p>
+            <h3>{{ $stats['active_count'] }}</h3>
+            <p>To Deliver</p>
+        </div>
+        <div class="stat-block text-center border-l border-r border-premium">
+            <h3>{{ $stats['today_delivered'] }}</h3>
+            <p>Done Today</p>
         </div>
         <div class="stat-block text-right">
-            <h3 class="text-green-400">
-                {{ \App\Models\Order::where('delivery_boy_id', Auth::id())->where('status', 'Delivered')->whereDate('updated_at', today())->count() }}
-            </h3>
-            <p>Done Today</p>
+            <h3 class="text-primary-accent">{{ $stats['delayed_count'] }}</h3>
+            <p>Delayed</p>
+        </div>
+    </div>
+
+    <!-- Enhanced Work Report Card -->
+    <div class="mx-5 mb-8 p-5 rounded-xl border border-premium bg-gradient-premium relative overflow-hidden group">
+        <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+            <i class="fa-solid fa-chart-line text-6xl text-primary-accent"></i>
+        </div>
+        
+        <h3 class="font-display font-bold text-primary-accent text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
+            <i class="fa-solid fa-award"></i> Performance Report
+        </h3>
+        
+        <div class="grid grid-cols-2 gap-4">
+            <div class="p-4 rounded-lg bg-premium-light border border-premium">
+                <div class="text-xs text-gray-400 mb-1 uppercase font-bold tracking-tighter">This Month</div>
+                <div class="text-2xl font-bold text-white">{{ $stats['monthly_delivered'] }} <span class="text-xs font-normal text-gray-500">jobs</span></div>
+            </div>
+            <div class="p-4 rounded-lg bg-premium-light border border-premium">
+                <div class="text-xs text-gray-400 mb-1 uppercase font-bold tracking-tighter">All-Time Success</div>
+                <div class="text-2xl font-bold text-white">{{ $stats['total_delivered'] }} <span class="text-xs font-normal text-gray-500">total</span></div>
+            </div>
+        </div>
+
+        <div class="mt-4 pt-4 border-t border-premium">
+            <div class="flex justify-between items-center mb-2">
+                <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Growth & Accuracy</span>
+                @php
+                    $rate = ($stats['total_delivered'] + $stats['active_count']) > 0 
+                        ? round(($stats['total_delivered'] / ($stats['total_delivered'] + $stats['active_count'] + 0.1)) * 100) 
+                        : 0;
+                @endphp
+                <span class="text-xs font-bold text-primary-accent">{{ $rate }}% Accuracy</span>
+            </div>
+            <div class="w-full h-1.5 bg-premium-light rounded-full overflow-hidden">
+                <div class="h-full bg-primary-accent rounded-full" style="width: {{ $rate }}%"></div>
+            </div>
+            <p class="text-xxs text-gray-500 mt-2 italic">* Metrics are updated in real-time as you finalize deliveries.</p>
         </div>
     </div>
 
