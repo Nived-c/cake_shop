@@ -1,231 +1,150 @@
 @extends('layouts.app')
-
 @section('title', 'Contact Us | Cake Atelier')
-@section('meta_description', 'Get in touch with Cake Atelier. Find our address, phone numbers, email and opening hours. We love to hear from our customers.')
+@section('meta_description', 'Get in touch with Cake Atelier. Find our address, phone, email and opening hours.')
 
 @push('styles')
 <style>
-.page-hero {
-    background: var(--maroon);
-    padding: 60px 24px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-}
-.page-hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at center, rgba(189,150,46,0.12) 0%, transparent 70%);
-}
-.page-hero h1 {
-    font-family: 'Signika', sans-serif;
-    font-size: clamp(30px, 5vw, 52px);
-    font-weight: 700;
-    color: white;
-    position: relative;
-    z-index: 2;
-    margin-bottom: 10px;
-}
-.page-hero p { color: rgba(255,255,255,0.75); font-size: 16px; position: relative; z-index: 2; }
-.breadcrumb { position:relative;z-index:2;font-size:13px;color:rgba(255,255,255,0.6);margin-bottom:16px; }
-.breadcrumb a { color: var(--gold); }
-.drip-down { background: var(--maroon); line-height: 0; }
-.drip-down svg { width: 100%; height: 70px; display: block; }
-
-/* ===== CONTACT PAGE ===== */
-.contact-page { background: var(--cream); padding: 80px 0; }
+.contact-page { background: var(--white); padding: 80px 0 100px; }
 .contact-inner {
-    max-width: 1100px;
+    max-width: 1280px;
     margin: 0 auto;
-    padding: 0 24px;
+    padding: 0 32px;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 56px;
+    gap: 80px;
     align-items: start;
 }
 
-/* Contact Details */
-.contact-info h2 {
-    font-family: 'Signika', sans-serif;
-    font-size: clamp(24px, 3.5vw, 34px);
-    font-weight: 700;
-    color: var(--text-dark);
-    margin-bottom: 8px;
-}
-.contact-info h2 span { color: var(--maroon); }
-.contact-info > p {
-    font-size: 15px;
-    color: var(--text-mid);
-    line-height: 1.8;
-    margin-bottom: 32px;
-}
-
-.contact-detail-cards { display: flex; flex-direction: column; gap: 16px; margin-bottom: 32px; }
-.contact-detail-card {
-    background: white;
-    border-radius: 12px;
-    padding: 20px 24px;
-    display: flex;
-    align-items: flex-start;
-    gap: 18px;
-    box-shadow: 0 4px 16px rgba(101,6,50,0.08);
-    transition: transform 0.25s, box-shadow 0.25s;
-}
-.contact-detail-card:hover {
-    transform: translateX(4px);
-    box-shadow: 0 8px 28px rgba(101,6,50,0.14);
-}
-.contact-detail-icon {
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
-    background: var(--maroon);
-    color: white;
-    font-size: 20px;
+/* Info */
+.contact-details { display: flex; flex-direction: column; gap: 28px; margin: 36px 0; }
+.contact-item { display: flex; gap: 20px; align-items: flex-start; }
+.contact-item-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(40,106,115,0.08);
+    border-radius: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 20px;
+    color: var(--teal);
     flex-shrink: 0;
 }
-.contact-detail-card .label {
-    font-family: 'Signika', sans-serif;
-    font-size: 12px;
+.contact-item-label {
+    font-size: 11px;
     font-weight: 700;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--gold);
+    color: var(--muted);
     margin-bottom: 4px;
 }
-.contact-detail-card h4 {
-    font-family: 'Signika', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--text-dark);
-    margin-bottom: 4px;
+.contact-item h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--dark);
+    margin-bottom: 3px;
 }
-.contact-detail-card p, .contact-detail-card a {
-    font-size: 14px;
-    color: var(--text-mid);
-    line-height: 1.7;
-}
-.contact-detail-card a:hover { color: var(--maroon); }
+.contact-item p, .contact-item a { font-size: 14px; color: var(--muted); line-height: 1.7; }
+.contact-item a:hover { color: var(--teal); }
 
 /* Hours */
-.hours-table { width: 100%; border-collapse: collapse; }
+.hours-table { width: 100%; border-collapse: collapse; margin-top: 36px; }
 .hours-table tr td {
-    padding: 8px 12px;
+    padding: 10px 0;
     font-size: 14px;
-    color: var(--text-mid);
-    border-bottom: 1px solid var(--cream-dark);
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
 }
 .hours-table tr:last-child td { border-bottom: none; }
-.hours-table tr td:first-child { font-weight: 600; color: var(--text-dark); }
-.hours-table tr td:last-child { text-align: right; }
-.open-badge { color: #22c55e; font-weight: 700; }
-.closed-badge { color: #ef4444; font-weight: 700; }
+.hours-table tr td:first-child { color: var(--dark); font-weight: 500; }
+.hours-table tr td:last-child { text-align: right; color: var(--teal); font-weight: 600; }
 
-/* Contact Form */
+/* Form */
 .contact-form-wrap {
-    background: white;
-    border-radius: 14px;
-    padding: 40px 36px;
-    box-shadow: 0 4px 20px rgba(101,6,50,0.1);
+    background: var(--off-white);
+    padding: 44px;
+    border-top: 3px solid var(--teal);
+    border-radius: 4px;
 }
 .contact-form-wrap h3 {
-    font-family: 'Signika', sans-serif;
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--maroon);
-    margin-bottom: 24px;
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--dark);
+    margin-bottom: 28px;
 }
-.form-group { margin-bottom: 20px; }
-.form-label { display:block;font-family:'Signika',sans-serif;font-size:14px;font-weight:600;color:var(--maroon);margin-bottom:6px; }
+.form-group { margin-bottom: 18px; }
+.form-label { display:block;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px; }
 .form-control {
     width: 100%;
     padding: 11px 14px;
-    border: 2px solid var(--cream-dark);
-    border-radius: 8px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
     font-size: 14px;
-    color: var(--text-dark);
-    background: var(--cream);
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Jost', sans-serif;
+    color: var(--dark);
+    background: var(--white);
     outline: none;
-    transition: border-color 0.2s, background 0.2s;
+    transition: border-color 0.2s;
 }
-.form-control:focus { border-color: var(--maroon); background: white; }
-textarea.form-control { resize: vertical; min-height: 120px; }
+.form-control:focus { border-color: var(--teal); }
+textarea.form-control { min-height: 120px; resize: vertical; }
+.alert-success {
+    background: rgba(40,106,115,0.08);
+    border: 1px solid rgba(40,106,115,0.2);
+    color: var(--teal);
+    padding: 12px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
 
 /* Map */
-.map-section {
-    background: var(--maroon);
-    padding: 0;
-    margin-top: 80px;
-}
-.map-section iframe {
-    width: 100%;
-    height: 380px;
-    border: 0;
-    display: block;
-    filter: sepia(0.3) contrast(1.1);
-}
-
-/* Alert */
-.alert-success {
-    background: rgba(34,197,94,0.1);
-    border: 2px solid rgba(34,197,94,0.3);
-    color: #15803d;
-    border-radius: 8px;
-    padding: 12px 16px;
-    margin-bottom: 20px;
-    font-size: 14px;
-    font-weight: 600;
-}
+.map-wrap { margin-top: 80px; }
+.map-wrap iframe { width: 100%; height: 360px; border: 0; display: block; border-radius: 4px; }
 
 @media (max-width: 900px) {
     .contact-inner { grid-template-columns: 1fr; }
+    .contact-form-wrap { padding: 28px; }
 }
 </style>
 @endpush
 
 @section('content')
-
-<section class="page-hero">
-    <div class="breadcrumb"><a href="{{ route('home') }}">Home</a> &rsaquo; Contact Us</div>
+<div class="page-banner">
     <h1>Contact Us</h1>
-    <p>We'd love to hear from you — reach out any time</p>
-</section>
-
-<div class="drip-down">
-    <svg viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0,0 L0,30 Q30,70 70,30 Q110,0 150,30 Q190,60 230,35 Q270,10 310,38 Q350,65 390,35 Q430,5 470,35 Q510,65 550,38 Q590,10 630,38 Q670,66 710,38 Q750,10 790,35 Q830,60 870,35 Q910,10 950,35 Q990,60 1030,38 Q1070,15 1110,40 Q1150,65 1190,38 Q1230,10 1270,35 Q1310,60 1350,38 Q1390,15 1440,35 L1440,0 Z" fill="var(--cream)"/>
-    </svg>
+    <nav class="page-breadcrumb">
+        <a href="{{ route('home') }}">Home</a>
+        <span class="sep">›</span>
+        <span>Contact</span>
+    </nav>
 </div>
 
 <div class="contact-page">
     <div class="contact-inner">
-
         <!-- Left: Info -->
-        <div class="contact-info">
-            <h2>Get in <span>Touch</span></h2>
-            <div class="section-underline" style="margin:14px 0 20px;"></div>
-            <p>
-                We're always happy to assist you — whether you'd like information about our products, want to place a custom order, or simply want to say hello. Drop by our bakery or reach out via phone, email or WhatsApp.
+        <div>
+            <span class="section-label">Get In Touch</span>
+            <h2 class="section-heading">We'd love to hear from you</h2>
+            <div class="teal-divider"></div>
+            <p style="font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:0;">
+                Whether you'd like information about our products, want to place a custom order, or simply want to say hello — drop by our bakery or reach out via phone, email or WhatsApp.
             </p>
 
-            <div class="contact-detail-cards">
-                <div class="contact-detail-card">
-                    <div class="contact-detail-icon"><i class="fa-solid fa-location-dot"></i></div>
+            <div class="contact-details">
+                <div class="contact-item">
+                    <div class="contact-item-icon"><i class="fa-solid fa-location-dot"></i></div>
                     <div>
-                        <div class="label">Our Location</div>
+                        <div class="contact-item-label">Our Location</div>
                         <h4>Cake Atelier</h4>
                         <p>123 Baker's Lane, MG Road<br>Kochi, Kerala – 682001</p>
                     </div>
                 </div>
-                <div class="contact-detail-card">
-                    <div class="contact-detail-icon"><i class="fa-solid fa-phone"></i></div>
+                <div class="contact-item">
+                    <div class="contact-item-icon"><i class="fa-solid fa-phone"></i></div>
                     <div>
-                        <div class="label">Call Us</div>
+                        <div class="contact-item-label">Call Us</div>
                         <h4>Phone Numbers</h4>
                         <p>
                             <a href="tel:+914842767660">Tel: 0484 2767660</a><br>
@@ -233,47 +152,42 @@ textarea.form-control { resize: vertical; min-height: 120px; }
                         </p>
                     </div>
                 </div>
-                <div class="contact-detail-card">
-                    <div class="contact-detail-icon"><i class="fa-solid fa-envelope"></i></div>
+                <div class="contact-item">
+                    <div class="contact-item-icon"><i class="fa-solid fa-envelope"></i></div>
                     <div>
-                        <div class="label">Email Us</div>
+                        <div class="contact-item-label">Email Us</div>
                         <h4>Email Address</h4>
                         <a href="mailto:hello@cakeatelier.in">hello@cakeatelier.in</a>
                     </div>
                 </div>
-                <div class="contact-detail-card">
-                    <div class="contact-detail-icon"><i class="fa-brands fa-whatsapp"></i></div>
+                <div class="contact-item">
+                    <div class="contact-item-icon"><i class="fa-brands fa-whatsapp"></i></div>
                     <div>
-                        <div class="label">WhatsApp Orders</div>
+                        <div class="contact-item-label">WhatsApp Orders</div>
                         <h4>Chat with Us</h4>
                         <a href="https://wa.me/919895588988" target="_blank">+91 98955 88988</a>
                     </div>
                 </div>
             </div>
 
-            <!-- Hours -->
-            <div style="background:white;border-radius:12px;padding:24px;box-shadow:0 4px 16px rgba(101,6,50,0.08);">
-                <h4 style="font-family:'Signika',sans-serif;font-size:17px;font-weight:700;color:var(--maroon);margin-bottom:16px;">
-                    <i class="fa-solid fa-clock" style="color:var(--gold);margin-right:8px;"></i>Opening Hours
-                </h4>
+            <div>
+                <span class="section-label">Opening Hours</span>
                 <table class="hours-table">
-                    <tr><td>Monday – Friday</td><td class="open-badge">8:00 AM – 9:00 PM</td></tr>
-                    <tr><td>Saturday</td><td class="open-badge">8:00 AM – 10:00 PM</td></tr>
-                    <tr><td>Sunday</td><td class="open-badge">9:00 AM – 8:00 PM</td></tr>
-                    <tr><td>Public Holidays</td><td class="open-badge">10:00 AM – 6:00 PM</td></tr>
+                    <tr><td>Monday – Friday</td><td>8:00 AM – 9:00 PM</td></tr>
+                    <tr><td>Saturday</td><td>8:00 AM – 10:00 PM</td></tr>
+                    <tr><td>Sunday</td><td>9:00 AM – 8:00 PM</td></tr>
+                    <tr><td>Public Holidays</td><td>10:00 AM – 6:00 PM</td></tr>
                 </table>
             </div>
         </div>
 
-        <!-- Right: Contact Form -->
+        <!-- Right: Form -->
         <div class="contact-form-wrap">
-            <h3><i class="fa-solid fa-paper-plane" style="color:var(--gold);margin-right:10px;"></i>Send Us a Message</h3>
-
+            <h3>Send Us a Message</h3>
             @if(session('success'))
-                <div class="alert-success">✅ {{ session('success') }}</div>
+                <div class="alert-success">✓ {{ session('success') }}</div>
             @endif
-
-            <form action="#" method="POST">
+            <form action="{{ route('contact.submit') }}" method="POST">
                 @csrf
                 <div class="form-group">
                     <label class="form-label" for="contact_name">Full Name *</label>
@@ -303,24 +217,20 @@ textarea.form-control { resize: vertical; min-height: 120px; }
                     <label class="form-label" for="contact_message">Message *</label>
                     <textarea id="contact_message" name="message" class="form-control" placeholder="Write your message here..." required></textarea>
                 </div>
-                <button type="submit" class="btn-maroon" style="width:100%;font-size:15px;padding:14px;">
-                    <i class="fa-solid fa-paper-plane"></i>&nbsp; Send Message
+                <button type="submit" class="btn-teal" style="width:100%;justify-content:center;font-size:14px;padding:14px;">
+                    <i class="fa-solid fa-paper-plane"></i> Send Message
                 </button>
             </form>
         </div>
+    </div>
 
+    <!-- Map -->
+    <div class="map-wrap container">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3929.376853434!2d76.2673!3d9.9312!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOcKwNTUnNTIuMyJOIDc2wrAxNic0Mi4zIkU!5e0!3m2!1sen!2sin!4v1600000000"
+            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            title="Cake Atelier Location">
+        </iframe>
     </div>
 </div>
-
-<!-- Map -->
-<div class="map-section">
-    <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3929.376853434!2d76.2673!3d9.9312!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOcKwNTUnNTIuMyJOIDc2wrAxNic0Mi4zIkU!5e0!3m2!1sen!2sin!4v1600000000"
-        allowfullscreen=""
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        title="Cake Atelier Location Map"
-    ></iframe>
-</div>
-
 @endsection

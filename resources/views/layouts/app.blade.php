@@ -6,611 +6,569 @@
     <title>@yield('title', 'Cake Atelier | Premium Custom Cakes')</title>
     <meta name="description" content="@yield('meta_description', 'Premium custom cakes, pastries and baked goods. Order online for delivery or pickup.')">
 
-    <!-- Google Fonts: Signika & Open Sans -->
-    <link href="https://fonts.googleapis.com/css2?family=Signika:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+    <!-- Google Fonts: Playfair Display + Jost -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* ===== DESIGN TOKENS (Original Blush Pink & Charcoal) ===== */
-        :root {
-            --maroon:        #D48B96;   /* Soft Blush Pink  */
-            --maroon-dark:   #2F2A32;   /* Dark Charcoal Plum (nav/footer) */
-            --maroon-light:  #E0A0AB;   /* Lighter pink */
-            --gold:          #D4AF37;   /* Accent Gold */
-            --gold-light:    #E2C35A;
-            --cream:         #FDFCFB;   /* Off-white background */
-            --cream-dark:    #F5EFF0;   /* Subtle pinkish dividers */
-            --white:         #ffffff;
-            --text-dark:     #2F2A32;   /* Charcoal heading text */
-            --text-mid:      #675D6E;
-            --text-light:    #9A8FA0;
-            --nav-height:    72px;
-        }
+    /* ===== DESIGN TOKENS (Lollino-inspired) ===== */
+    :root {
+        --teal:         #286a73;
+        --teal-dark:    #1e5059;
+        --teal-light:   #3a8a95;
+        --red:          #e33e4f;
+        --white:        #ffffff;
+        --off-white:    #f5f5f5;
+        --light-gray:   #e8e8ea;
+        --mid-gray:     #999999;
+        --dark:         #111111;
+        --body:         #333333;
+        --muted:        #666666;
+        --border:       #e0e0e0;
+    }
 
-        /* ===== RESET & BASE ===== */
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
+    /* ===== RESET ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Jost', sans-serif; background: var(--white); color: var(--body); line-height: 1.6; }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+    ul { list-style: none; }
 
-        body {
-            font-family: 'Open Sans', sans-serif;
-            background-color: var(--cream);
-            color: var(--text-dark);
-            min-height: 100vh;
-        }
+    /* ===== TOP BAR ===== */
+    .top-bar {
+        background: var(--teal);
+        color: var(--white);
+        padding: 8px 32px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 13px;
+        font-weight: 400;
+        letter-spacing: 0.02em;
+    }
+    .top-bar-left { display: flex; align-items: center; gap: 16px; }
+    .top-bar-left i { font-size: 18px; opacity: 0.85; }
+    .top-bar-center { display: flex; align-items: center; gap: 20px; }
+    .top-bar-center a { color: white; opacity: 0.85; font-size: 15px; transition: opacity 0.2s; }
+    .top-bar-center a:hover { opacity: 1; }
+    .top-bar-right a {
+        color: white;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 13px;
+        opacity: 0.9;
+        transition: opacity 0.2s;
+    }
+    .top-bar-right a:hover { opacity: 1; }
 
-        a { text-decoration: none; color: inherit; }
-        img { display: block; max-width: 100%; }
+    /* ===== MAIN NAVBAR ===== */
+    .main-header {
+        background: var(--white);
+        border-bottom: 1px solid var(--border);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+    .nav-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 32px;
+        display: flex;
+        align-items: center;
+        height: 80px;
+        gap: 32px;
+    }
 
-        /* ===== TOP ANNOUNCEMENT BAR ===== */
-        .top-bar {
-            background: var(--gold);
-            color: var(--white);
-            text-align: center;
-            padding: 8px 16px;
-            font-size: 13px;
-            font-family: 'Signika', sans-serif;
-            font-weight: 500;
-            letter-spacing: 0.03em;
-        }
-        .top-bar a { color: var(--white); font-weight: 700; }
+    /* Logo */
+    .logo {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        flex-shrink: 0;
+        text-decoration: none;
+    }
+    .logo-name {
+        font-family: 'Playfair Display', serif;
+        font-size: 32px;
+        font-weight: 700;
+        color: var(--teal);
+        line-height: 1;
+        letter-spacing: -0.03em;
+    }
+    .logo-sub {
+        font-family: 'Jost', sans-serif;
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 0.25em;
+        color: var(--muted);
+        text-transform: uppercase;
+        margin-top: 3px;
+    }
 
-        /* ===== HEADER / NAVBAR ===== */
-        header {
-            background: var(--maroon);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 20px rgba(101, 6, 50, 0.35);
-        }
+    /* Nav Links */
+    .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        flex: 1;
+    }
+    .nav-links li { position: relative; }
+    .nav-links > li > a {
+        font-family: 'Jost', sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--dark);
+        padding: 10px 14px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        transition: color 0.2s;
+        white-space: nowrap;
+    }
+    .nav-links > li > a:hover,
+    .nav-links > li > a.active { color: var(--teal); }
+    .nav-links > li > a i { font-size: 10px; opacity: 0.6; }
 
-        .nav-inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 24px;
-            height: var(--nav-height);
-            gap: 24px;
-        }
+    /* Dropdown */
+    .nav-dropdown {
+        position: absolute;
+        top: calc(100% + 1px);
+        left: 0;
+        background: var(--white);
+        min-width: 200px;
+        border: 1px solid var(--border);
+        border-top: 2px solid var(--teal);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-6px);
+        transition: all 0.22s ease;
+        z-index: 999;
+    }
+    .nav-links li:hover .nav-dropdown {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    .nav-dropdown a {
+        display: block;
+        padding: 10px 18px;
+        font-size: 13px;
+        color: var(--body);
+        border-bottom: 1px solid var(--border);
+        transition: all 0.18s;
+    }
+    .nav-dropdown a:last-child { border-bottom: none; }
+    .nav-dropdown a:hover { background: var(--off-white); color: var(--teal); padding-left: 24px; }
 
-        /* Logo box */
-        .logo-box {
-            background: var(--white);
-            border-radius: 0 0 20px 0;
-            padding: 10px 18px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            min-width: 160px;
-            flex-shrink: 0;
-            margin-top: 0;
-        }
-        .logo-box .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--maroon);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 18px;
-        }
-        .logo-box .logo-text {
-            font-family: 'Signika', sans-serif;
-            font-size: 22px;
-            font-weight: 700;
-            color: var(--maroon);
-            line-height: 1.1;
-        }
-        .logo-box .logo-tagline {
-            font-size: 10px;
-            color: var(--gold);
-            font-family: 'Signika', sans-serif;
-            font-weight: 400;
-        }
+    /* Nav Icons (right side) */
+    .nav-icons {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        flex-shrink: 0;
+    }
+    .nav-icon-btn {
+        position: relative;
+        color: var(--dark);
+        font-size: 19px;
+        cursor: pointer;
+        transition: color 0.2s;
+        background: none;
+        border: none;
+    }
+    .nav-icon-btn:hover { color: var(--teal); }
+    .nav-icon-badge {
+        position: absolute;
+        top: -6px;
+        right: -8px;
+        background: var(--teal);
+        color: white;
+        font-size: 10px;
+        font-weight: 700;
+        width: 17px;
+        height: 17px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .nav-whatsapp-btn {
+        background: var(--teal);
+        color: white;
+        font-family: 'Jost', sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        padding: 9px 20px;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: background 0.2s;
+        white-space: nowrap;
+    }
+    .nav-whatsapp-btn:hover { background: var(--teal-dark); }
 
-        /* Nav Links */
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            list-style: none;
-            flex: 1;
-        }
-        .nav-links li { position: relative; }
-        .nav-links a {
-            font-family: 'Signika', sans-serif;
-            font-weight: 500;
-            font-size: 15px;
-            color: var(--white);
-            padding: 8px 14px;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: color 0.25s;
-            white-space: nowrap;
-        }
-        .nav-links a:hover,
-        .nav-links a.active { color: var(--gold); }
-        .nav-links a.active::after {
-            content: '';
-            position: absolute;
-            bottom: -6px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60%;
-            height: 3px;
-            border-radius: 2px;
-            background: var(--gold);
-        }
+    /* Mobile hamburger */
+    .hamburger {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 22px;
+        color: var(--dark);
+        cursor: pointer;
+        padding: 4px;
+    }
 
-        /* Dropdown */
-        .dropdown-menu {
-            position: absolute;
-            top: calc(100% + 12px);
-            left: 0;
-            background: var(--cream);
-            min-width: 210px;
-            border-radius: 8px;
-            box-shadow: 0 8px 30px rgba(101, 6, 50, 0.2);
-            padding: 8px 0;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-8px);
-            transition: all 0.25s ease;
-            z-index: 999;
-        }
-        .nav-links li:hover .dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-        .dropdown-menu a {
-            color: var(--text-dark) !important;
-            font-size: 14px;
-            padding: 10px 20px;
-            display: block;
-            border-bottom: 1px solid rgba(101,6,50,0.08);
-            border-radius: 0;
-            transition: all 0.2s;
-        }
-        .dropdown-menu a:last-child { border-bottom: none; }
-        .dropdown-menu a:hover { background: var(--maroon); color: var(--white) !important; }
+    /* ===== SECTION HELPERS ===== */
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+    .section-label {
+        font-family: 'Jost', sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--teal);
+        margin-bottom: 10px;
+        display: block;
+    }
+    .section-heading {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(28px, 4vw, 46px);
+        font-weight: 400;
+        color: var(--dark);
+        line-height: 1.2;
+        margin-bottom: 20px;
+    }
+    .section-text {
+        font-size: 15px;
+        color: var(--muted);
+        line-height: 1.8;
+        max-width: 560px;
+    }
+    .teal-divider {
+        width: 48px;
+        height: 2px;
+        background: var(--teal);
+        margin-bottom: 24px;
+    }
 
-        /* WhatsApp button */
-        .whatsapp-btn {
-            background: var(--gold);
-            color: var(--white);
-            font-family: 'Signika', sans-serif;
-            font-weight: 600;
-            font-size: 13px;
-            border-radius: 8px;
-            padding: 8px 16px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            white-space: nowrap;
-            transition: background 0.25s, transform 0.2s;
-            flex-shrink: 0;
-        }
-        .whatsapp-btn:hover { background: #a07a20; transform: scale(1.02); }
-        .whatsapp-btn .wa-icon {
-            background: white;
-            color: var(--gold);
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-        }
+    /* ===== BUTTONS ===== */
+    .btn-teal {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--teal);
+        color: white;
+        font-family: 'Jost', sans-serif;
+        font-weight: 600;
+        font-size: 13px;
+        letter-spacing: 0.06em;
+        padding: 13px 30px;
+        border-radius: 4px;
+        border: 2px solid var(--teal);
+        transition: all 0.25s;
+        cursor: pointer;
+    }
+    .btn-teal:hover { background: var(--teal-dark); border-color: var(--teal-dark); transform: translateY(-1px); }
 
-        /* Mobile hamburger */
-        .hamburger {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            padding: 8px;
-        }
+    .btn-outline {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: transparent;
+        color: var(--teal);
+        font-family: 'Jost', sans-serif;
+        font-weight: 600;
+        font-size: 13px;
+        letter-spacing: 0.06em;
+        padding: 11px 28px;
+        border-radius: 4px;
+        border: 2px solid var(--teal);
+        transition: all 0.25s;
+        cursor: pointer;
+    }
+    .btn-outline:hover { background: var(--teal); color: white; transform: translateY(-1px); }
 
-        /* ===== DRIP SEPARATOR (chocolate drip effect) ===== */
-        .drip-separator {
-            width: 100%;
-            line-height: 0;
-            display: block;
-            position: relative;
-            z-index: 1;
-        }
-        .drip-separator svg {
-            width: 100%;
-            height: 80px;
-        }
-        .drip-top { /* maroon drips downward onto cream */ }
-        .drip-bottom { /* maroon drips upward onto cream */ transform: scaleY(-1); }
+    .btn-dark {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--dark);
+        color: white;
+        font-family: 'Jost', sans-serif;
+        font-weight: 600;
+        font-size: 13px;
+        letter-spacing: 0.06em;
+        padding: 13px 30px;
+        border-radius: 4px;
+        border: 2px solid var(--dark);
+        transition: all 0.25s;
+        cursor: pointer;
+    }
+    .btn-dark:hover { background: var(--teal); border-color: var(--teal); }
 
-        /* ===== SECTION HELPERS ===== */
-        .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
-        .section-title {
-            font-family: 'Signika', sans-serif;
-            font-size: clamp(26px, 4vw, 38px);
-            font-weight: 700;
-            color: var(--maroon);
-            text-align: center;
-            margin-bottom: 12px;
-        }
-        .section-subtitle {
-            font-size: 15px;
-            color: var(--text-mid);
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto 40px;
-            line-height: 1.7;
-        }
-        .section-underline {
-            width: 60px;
-            height: 3px;
-            background: var(--gold);
-            border-radius: 2px;
-            margin: 10px auto 20px;
-        }
+    /* ===== PAGE BANNER (inner pages) ===== */
+    .page-banner {
+        background: var(--light-gray);
+        padding: 64px 32px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+    }
+    .page-banner h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(36px, 6vw, 72px);
+        font-weight: 400;
+        color: var(--dark);
+        line-height: 1;
+        letter-spacing: -0.02em;
+    }
+    .page-breadcrumb {
+        font-size: 13px;
+        color: var(--muted);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .page-breadcrumb a { color: var(--teal); }
+    .page-breadcrumb a:hover { text-decoration: underline; }
+    .page-breadcrumb .sep { color: var(--mid-gray); }
 
-        /* ===== GOLD BUTTON ===== */
-        .btn-gold {
-            display: inline-block;
-            background: transparent;
-            color: var(--gold);
-            border: 2px solid var(--gold);
-            font-family: 'Signika', sans-serif;
-            font-weight: 600;
-            font-size: 14px;
-            padding: 12px 32px;
-            border-radius: 4px;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        .btn-gold:hover {
-            background: var(--gold);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(189, 150, 46, 0.4);
-        }
-        .btn-maroon {
-            display: inline-block;
-            background: var(--maroon);
-            color: white;
-            border: 2px solid var(--maroon);
-            font-family: 'Signika', sans-serif;
-            font-weight: 600;
-            font-size: 14px;
-            padding: 12px 32px;
-            border-radius: 4px;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        .btn-maroon:hover {
-            background: var(--maroon-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(101, 6, 50, 0.4);
-        }
+    /* ===== PRODUCT CARD (Lollino style) ===== */
+    .product-card {
+        background: var(--white);
+        transition: transform 0.3s ease;
+        cursor: pointer;
+    }
+    .product-card:hover { transform: translateY(-4px); }
+    .product-card-img {
+        background: var(--off-white);
+        aspect-ratio: 1/1;
+        overflow: hidden;
+        margin-bottom: 14px;
+        position: relative;
+    }
+    .product-card-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+    .product-card:hover .product-card-img img { transform: scale(1.06); }
+    .product-card-badge {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        background: var(--red);
+        color: white;
+        font-size: 11px;
+        font-weight: 700;
+        padding: 3px 10px;
+        border-radius: 2px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+    .product-card-cat {
+        font-family: 'Jost', sans-serif;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 5px;
+    }
+    .product-card-name {
+        font-family: 'Playfair Display', serif;
+        font-size: 18px;
+        font-weight: 400;
+        color: var(--dark);
+        margin-bottom: 6px;
+        line-height: 1.3;
+    }
+    .product-card-price {
+        font-family: 'Jost', sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--dark);
+    }
 
-        /* ===== PRODUCT CARD (homepage grid) ===== */
-        .product-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 16px rgba(101, 6, 50, 0.1);
-            transition: all 0.35s ease;
-        }
-        .product-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 16px 40px rgba(101, 6, 50, 0.2);
-        }
-        .product-card img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            display: block;
-        }
-        .product-card-body {
-            padding: 16px;
-            background: var(--maroon);
-        }
-        .product-card-body h3 {
-            font-family: 'Signika', sans-serif;
-            font-size: 16px;
-            font-weight: 600;
-            color: white;
-            margin-bottom: 4px;
-        }
-        .product-card-body p {
-            font-size: 13px;
-            color: rgba(255,255,255,0.7);
-        }
-        .product-card-body .price {
-            color: var(--gold-light);
-            font-weight: 700;
-            font-size: 15px;
-        }
+    /* ===== FOOTER ===== */
+    footer {
+        background: var(--teal);
+        color: white;
+        padding: 64px 0 0;
+    }
+    .footer-inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 32px 52px;
+        display: grid;
+        grid-template-columns: 1.4fr 1fr 1.6fr 1fr;
+        gap: 48px;
+    }
+    .footer-brand .logo-name { color: white; font-size: 36px; }
+    .footer-brand .logo-sub { color: rgba(255,255,255,0.6); }
+    .footer-brand p {
+        font-size: 14px;
+        color: rgba(255,255,255,0.75);
+        line-height: 1.8;
+        margin-top: 16px;
+        max-width: 260px;
+    }
+    .footer-social { display: flex; gap: 12px; margin-top: 20px; }
+    .footer-social a {
+        width: 36px;
+        height: 36px;
+        border: 1px solid rgba(255,255,255,0.3);
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(255,255,255,0.8);
+        font-size: 14px;
+        transition: all 0.2s;
+    }
+    .footer-social a:hover { border-color: white; color: white; background: rgba(255,255,255,0.1); }
+    .footer-col h4 {
+        font-family: 'Jost', sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: white;
+        margin-bottom: 20px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a {
+        font-size: 14px;
+        color: rgba(255,255,255,0.72);
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .footer-col ul li a:hover { color: white; padding-left: 4px; }
+    .footer-contact-item {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 14px;
+        align-items: flex-start;
+    }
+    .footer-contact-item i {
+        font-size: 15px;
+        color: rgba(255,255,255,0.6);
+        margin-top: 2px;
+        flex-shrink: 0;
+    }
+    .footer-contact-item span {
+        font-size: 14px;
+        color: rgba(255,255,255,0.75);
+        line-height: 1.6;
+    }
+    .footer-contact-item a { color: rgba(255,255,255,0.75); }
+    .footer-contact-item a:hover { color: white; }
+    .footer-bottom {
+        border-top: 1px solid rgba(255,255,255,0.15);
+        text-align: center;
+        padding: 18px 32px;
+        font-size: 13px;
+        color: rgba(255,255,255,0.5);
+    }
 
-        /* ===== PRODUCT CARD LG (products listing & detail) ===== */
-        .product-card-lg {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 16px rgba(101, 6, 50, 0.08);
-            transition: all 0.35s ease;
-            display: flex;
-            flex-direction: column;
-        }
-        .product-card-lg:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 16px 40px rgba(101, 6, 50, 0.18);
-        }
-        .product-card-lg .card-img-wrap {
-            position: relative;
-            overflow: hidden;
-        }
-        .product-card-lg img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-        .product-card-lg:hover img { transform: scale(1.06); }
-        .product-card-lg .card-badge {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: var(--gold);
-            color: white;
-            font-family: 'Signika', sans-serif;
-            font-size: 11px;
-            font-weight: 700;
-            padding: 3px 10px;
-            border-radius: 20px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-        .product-card-lg .card-body {
-            padding: 16px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        .product-card-lg .card-category {
-            font-size: 11px;
-            color: var(--gold);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            margin-bottom: 4px;
-        }
-        .product-card-lg .card-title {
-            font-family: 'Signika', sans-serif;
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--maroon);
-            margin-bottom: 6px;
-        }
-        .product-card-lg .card-desc {
-            font-size: 13px;
-            color: var(--text-light);
-            line-height: 1.6;
-            flex: 1;
-            margin-bottom: 12px;
-        }
-        .product-card-lg .card-footer {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding-top: 12px;
-            border-top: 1px solid var(--cream-dark);
-        }
-        .product-card-lg .card-price {
-            font-family: 'Signika', sans-serif;
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--maroon);
-        }
-        .card-order-btn {
-            background: var(--maroon);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            padding: 7px 14px;
-            font-size: 12px;
-            font-family: 'Signika', sans-serif;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s;
-            text-decoration: none;
-            display: inline-block;
-        }
-        .card-order-btn:hover { background: var(--gold); color: white; }
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+        .footer-inner { grid-template-columns: 1fr 1fr; }
+        .top-bar-center { display: none; }
+    }
+    @media (max-width: 860px) {
+        .nav-links { display: none; }
+        .hamburger { display: block; }
+        .nav-whatsapp-btn span { display: none; }
+    }
+    @media (max-width: 600px) {
+        .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+        .top-bar { flex-wrap: wrap; gap: 6px; }
+        .page-banner { flex-direction: column; align-items: flex-start; gap: 12px; }
+    }
 
-        /* ===== FOOTER ===== */
-        footer {
-            background: var(--maroon-dark);
-            color: white;
-            padding: 56px 0 0;
-        }
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 2fr 1fr;
-            gap: 40px;
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 24px 48px;
-        }
-        .footer-logo-box {
-            background: white;
-            border-radius: 8px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            text-align: center;
-        }
-        .footer-logo-box .logo-text {
-            font-family: 'Signika', sans-serif;
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--maroon);
-        }
-        .footer-logo-box .logo-tagline { color: var(--gold); font-size: 12px; }
-        .footer-section h4 {
-            font-family: 'Signika', sans-serif;
-            font-size: 18px;
-            font-weight: 600;
-            color: white;
-            margin-bottom: 16px;
-        }
-        .footer-section h4::after {
-            content: '';
-            display: block;
-            width: 40px;
-            height: 2px;
-            background: var(--gold);
-            margin-top: 8px;
-            border-radius: 1px;
-        }
-        .footer-section ul { list-style: none; }
-        .footer-section ul li { margin-bottom: 10px; }
-        .footer-section ul li a {
-            color: rgba(255,255,255,0.75);
-            font-size: 14px;
-            transition: color 0.2s;
-        }
-        .footer-section ul li a:hover { color: var(--gold); }
-        .footer-contact-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 14px;
-            margin-bottom: 18px;
-        }
-        .footer-contact-icon {
-            color: var(--gold);
-            font-size: 18px;
-            margin-top: 2px;
-            flex-shrink: 0;
-        }
-        .footer-contact-title {
-            font-family: 'Signika', sans-serif;
-            font-size: 13px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--gold);
-            margin-bottom: 2px;
-        }
-        .footer-contact-item p, .footer-contact-item a {
-            font-size: 14px;
-            color: rgba(255,255,255,0.8);
-            line-height: 1.6;
-        }
-        .footer-social { display: flex; gap: 12px; margin-top: 16px; }
-        .footer-social a {
-            width: 40px;
-            height: 40px;
-            border: 2px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 16px;
-            transition: all 0.25s;
-        }
-        .footer-social a:hover { border-color: var(--gold); color: var(--gold); }
-        .footer-bottom {
-            background: rgba(0,0,0,0.25);
-            text-align: center;
-            padding: 16px;
-            font-size: 13px;
-            color: rgba(255,255,255,0.55);
-            border-top: 1px solid rgba(255,255,255,0.08);
-        }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 900px) {
-            .nav-links { display: none; }
-            .hamburger { display: block; }
-            .footer-grid { grid-template-columns: 1fr 1fr; }
-        }
-        @media (max-width: 600px) {
-            .footer-grid { grid-template-columns: 1fr; }
-            .whatsapp-btn span { display: none; }
-        }
-
-        /* Mobile nav overlay */
-        .mobile-nav {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: var(--maroon-dark);
-            z-index: 2000;
-            flex-direction: column;
-            padding: 30px 24px;
-            gap: 0;
-        }
-        .mobile-nav.open { display: flex; }
-        .mobile-nav .close-btn {
-            align-self: flex-end;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 28px;
-            cursor: pointer;
-            margin-bottom: 30px;
-        }
-        .mobile-nav a {
-            font-family: 'Signika', sans-serif;
-            font-size: 20px;
-            font-weight: 600;
-            color: white;
-            padding: 16px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-        .mobile-nav a:hover { color: var(--gold); }
+    /* Mobile Nav */
+    .mobile-nav {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: var(--white);
+        z-index: 2000;
+        flex-direction: column;
+        padding: 24px;
+        overflow-y: auto;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 32px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--border);
+    }
+    .mobile-nav a {
+        font-family: 'Playfair Display', serif;
+        font-size: 22px;
+        color: var(--dark);
+        padding: 14px 0;
+        border-bottom: 1px solid var(--border);
+        display: block;
+    }
+    .mobile-nav a:hover { color: var(--teal); }
+    .mobile-close {
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: var(--dark);
+    }
     </style>
 
     @stack('styles')
 </head>
 <body>
-    <!-- Top Announcement Bar -->
+
+    <!-- ===== TOP BAR ===== -->
     <div class="top-bar">
-        🎂 Free Delivery on Wedding &amp; Event Cakes &nbsp;•&nbsp; Order 24hrs in advance &nbsp;•&nbsp;
-        <a href="tel:+919895588988">Call: +91 98955 88988</a>
+        <div class="top-bar-left">
+            <i class="fa-regular fa-clock"></i>
+            <div>
+                <div style="font-weight:600;">10AM TO 10PM</div>
+                <div>Call: +91 98955 88988</div>
+            </div>
+        </div>
+        <div class="top-bar-center">
+            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+        <div class="top-bar-right">
+            <a href="#"><i class="fa-regular fa-user"></i> Log in / Register</a>
+        </div>
     </div>
 
-    <!-- Header / Navbar -->
-    <header>
-        <div class="nav-inner">
+    <!-- ===== MAIN NAVBAR ===== -->
+    <header class="main-header">
+        <div class="nav-container">
             <!-- Logo -->
-            <a href="{{ route('home') }}" class="logo-box">
-                <div class="logo-icon"><i class="fa-solid fa-cake-candles"></i></div>
-                <div>
-                    <div class="logo-text">Cake Atelier</div>
-                    <div class="logo-tagline">...It's all about cakes</div>
-                </div>
+            <a href="{{ route('home') }}" class="logo">
+                <span class="logo-name">Cake Atelier</span>
+                <span class="logo-sub">Cakes &bull; Pastries &bull; Desserts</span>
             </a>
 
-            <!-- Desktop Nav -->
+            <!-- Desktop Nav Links -->
             <ul class="nav-links">
                 <li>
                     <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">
@@ -619,14 +577,15 @@
                 </li>
                 <li>
                     <a href="{{ route('products.index') }}" class="{{ request()->routeIs('products.*') ? 'active' : '' }}">
-                        Products <i class="fa-solid fa-chevron-down fa-xs"></i>
+                        Shop <i class="fa-solid fa-chevron-down"></i>
                     </a>
-                    <div class="dropdown-menu">
+                    <div class="nav-dropdown">
                         <a href="{{ route('products.index') }}">All Products</a>
                         <a href="{{ route('products.index', ['category' => 'cakes']) }}">Cakes</a>
                         <a href="{{ route('products.index', ['category' => 'pastries']) }}">Pastries</a>
                         <a href="{{ route('products.index', ['category' => 'cupcakes']) }}">Cupcakes</a>
                         <a href="{{ route('products.index', ['category' => 'desserts']) }}">Desserts</a>
+                        <a href="{{ route('products.index', ['category' => 'macarons']) }}">Macarons</a>
                     </div>
                 </li>
                 <li>
@@ -646,103 +605,107 @@
                 </li>
             </ul>
 
-            <!-- WhatsApp CTA -->
-            <a href="https://wa.me/919895588988" target="_blank" class="whatsapp-btn">
-                <span>Order now on WhatsApp<br><strong>+91 98955 88988</strong></span>
-                <div class="wa-icon"><i class="fa-brands fa-whatsapp"></i></div>
-            </a>
-
-            <!-- Hamburger (mobile) -->
-            <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
-                <i class="fa-solid fa-bars"></i>
-            </button>
+            <!-- Nav Icons -->
+            <div class="nav-icons">
+                <a href="{{ route('home') }}" class="nav-icon-btn" aria-label="Search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </a>
+                <a href="https://wa.me/919895588988" target="_blank" class="nav-whatsapp-btn">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>Order Now</span>
+                </a>
+                <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
         </div>
     </header>
 
-    <!-- Mobile Overlay Nav -->
+    <!-- Mobile Nav -->
     <div class="mobile-nav" id="mobileNav">
-        <button class="close-btn" id="closeNavBtn"><i class="fa-solid fa-xmark"></i></button>
+        <div class="mobile-nav-header">
+            <a href="{{ route('home') }}" class="logo" style="border:none;padding:0;">
+                <span class="logo-name" style="font-size:24px;">Cake Atelier</span>
+            </a>
+            <button class="mobile-close" id="closeNavBtn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
         <a href="{{ route('home') }}">Home</a>
-        <a href="{{ route('products.index') }}">Products</a>
+        <a href="{{ route('products.index') }}">Shop</a>
         <a href="{{ route('customized') }}">Customized Cakes</a>
         <a href="{{ route('delivery') }}">Delivery</a>
         <a href="{{ route('contact') }}">Contact Us</a>
+        <div style="margin-top:24px;">
+            <a href="https://wa.me/919895588988" target="_blank" class="btn-teal" style="display:inline-flex;">
+                <i class="fa-brands fa-whatsapp"></i> Order on WhatsApp
+            </a>
+        </div>
     </div>
 
-    <!-- Page Content -->
+    <!-- ===== PAGE CONTENT ===== -->
     @yield('content')
 
     <!-- ===== FOOTER ===== -->
-    <!-- Drip transition into footer -->
-    <div class="drip-separator drip-bottom" style="background:var(--cream);">
-        <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0,0 L0,40 Q40,80 80,40 Q120,0 160,40 Q200,80 240,50 Q280,20 320,50 Q360,80 400,45 Q440,10 480,45 Q520,80 560,50 Q600,20 640,50 Q680,80 720,45 Q760,10 800,45 Q840,80 880,50 Q920,20 960,45 Q1000,70 1040,40 Q1080,10 1120,45 Q1160,80 1200,50 Q1240,20 1280,45 Q1320,70 1360,40 Q1400,10 1440,40 L1440,0 Z"
-                fill="var(--maroon-dark)"/>
-        </svg>
-    </div>
-
     <footer>
-        <div class="footer-grid">
-            <!-- Logo col -->
-            <div>
-                <div class="footer-logo-box">
-                    <div style="font-size:48px;color:var(--maroon)">🎂</div>
-                    <div class="logo-text">Cake Atelier</div>
-                    <div class="logo-tagline">...It's all about cakes</div>
+        <div class="footer-inner">
+            <!-- Brand -->
+            <div class="footer-brand">
+                <div class="logo">
+                    <span class="logo-name" style="color:white;font-size:34px;">Cake Atelier</span>
+                    <span class="logo-sub" style="color:rgba(255,255,255,0.55);">Cakes &bull; Pastries &bull; Desserts</span>
                 </div>
+                <p>Handcrafted premium cakes and pastries made with the finest ingredients. Your happiness is baked into every bite.</p>
                 <div class="footer-social">
                     <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
                     <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
                     <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
                 </div>
             </div>
 
             <!-- Quick Links -->
-            <div class="footer-section">
+            <div class="footer-col">
                 <h4>Quick Links</h4>
                 <ul>
                     <li><a href="{{ route('home') }}">Home</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="{{ route('products.index') }}">Products</a></li>
+                    <li><a href="{{ route('products.index') }}">Shop</a></li>
                     <li><a href="{{ route('customized') }}">Customized Cakes</a></li>
+                    <li><a href="{{ route('delivery') }}">Delivery Info</a></li>
                     <li><a href="{{ route('contact') }}">Contact Us</a></li>
                 </ul>
             </div>
 
             <!-- Contact -->
-            <div class="footer-section">
-                <h4>Get in Touch</h4>
+            <div class="footer-col">
+                <h4>Get In Touch</h4>
                 <div class="footer-contact-item">
-                    <i class="fa-solid fa-location-dot footer-contact-icon"></i>
-                    <div>
-                        <div class="footer-contact-title">Cake Atelier</div>
-                        <p>123 Baker's Lane, MG Road<br>Kochi, Kerala - 682001</p>
-                    </div>
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>123 Baker's Lane, MG Road<br>Kochi, Kerala – 682001</span>
                 </div>
                 <div class="footer-contact-item">
-                    <i class="fa-solid fa-phone footer-contact-icon"></i>
-                    <div>
-                        <div class="footer-contact-title">Call Us</div>
-                        <p>Tel: 0484 2767660<br>Mob: +91 98955 88988</p>
-                    </div>
+                    <i class="fa-solid fa-phone"></i>
+                    <span>
+                        <a href="tel:+914842767660">0484 2767660</a><br>
+                        <a href="tel:+919895588988">+91 98955 88988</a>
+                    </span>
                 </div>
                 <div class="footer-contact-item">
-                    <i class="fa-solid fa-envelope footer-contact-icon"></i>
-                    <div>
-                        <div class="footer-contact-title">Mail Us</div>
-                        <a href="mailto:hello@cakeatelier.in">hello@cakeatelier.in</a>
-                    </div>
+                    <i class="fa-solid fa-envelope"></i>
+                    <span><a href="mailto:hello@cakeatelier.in">hello@cakeatelier.in</a></span>
+                </div>
+                <div class="footer-contact-item">
+                    <i class="fa-regular fa-clock"></i>
+                    <span>Open Daily: 10 AM – 10 PM</span>
                 </div>
             </div>
 
-            <!-- Follow Us -->
-            <div class="footer-section">
-                <h4>Follow Us</h4>
-                <p style="color:rgba(255,255,255,0.7);font-size:14px;line-height:1.7;margin-bottom:16px;">
-                    Follow us on social media for daily specials, behind-the-scenes baking and new arrivals.
+            <!-- Order CTA -->
+            <div class="footer-col">
+                <h4>Order Now</h4>
+                <p style="font-size:14px;color:rgba(255,255,255,0.75);line-height:1.8;margin-bottom:20px;">
+                    Place your order instantly via WhatsApp or call us for any queries about custom cakes.
                 </p>
-                <a href="https://wa.me/919895588988" target="_blank" class="btn-gold" style="font-size:13px;padding:10px 20px;">
-                    <i class="fa-brands fa-whatsapp"></i> Order on WhatsApp
+                <a href="https://wa.me/919895588988" target="_blank" class="btn-dark" style="background:white;color:var(--teal);border-color:white;font-size:13px;padding:11px 22px;">
+                    <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
                 </a>
             </div>
         </div>
@@ -751,12 +714,11 @@
         </div>
     </footer>
 
-    <!-- Mobile Nav Script -->
     <script>
-        document.getElementById('hamburgerBtn').addEventListener('click', function () {
+        document.getElementById('hamburgerBtn').addEventListener('click', function() {
             document.getElementById('mobileNav').classList.add('open');
         });
-        document.getElementById('closeNavBtn').addEventListener('click', function () {
+        document.getElementById('closeNavBtn').addEventListener('click', function() {
             document.getElementById('mobileNav').classList.remove('open');
         });
     </script>
