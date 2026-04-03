@@ -17,6 +17,8 @@ class Order extends Model
         'delivery_date',
         'delivery_time_slot',
         'shipping_address',
+        'delivery_boy_id',
+        'delivery_notes',
     ];
 
     public function user()
@@ -27,5 +29,10 @@ class Order extends Model
     public function items()
     {
         return $this->hasMany(OrderItem::class);
+    }
+
+    public function deliveryBoy()
+    {
+        return $this->belongsTo(User::class, 'delivery_boy_id');
     }
 }

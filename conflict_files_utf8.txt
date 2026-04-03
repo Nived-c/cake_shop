@@ -1,0 +1,5 @@
+﻿resources/views/shop/contact.blade.php
+resources/views/shop/customized.blade.php
+resources/views/shop/delivery.blade.php
+resources/views/shop/products.blade.php
+resources/views/welcome.blade.php
