@@ -160,35 +160,42 @@
     </div>
     <div class="driver-stats">
         <div class="stat-block">
+            <div class="flex items-center gap-2 mb-1 justify-start">
+                <i class="fa-solid fa-clipboard-list text-gray-500 text-xs"></i>
+                <p>To Deliver</p>
+            </div>
             <h3>{{ $stats['active_count'] }}</h3>
-            <p>To Deliver</p>
         </div>
         <div class="stat-block text-center border-l border-r border-premium">
+            <div class="flex items-center gap-2 mb-1 justify-center">
+                <i class="fa-solid fa-calendar-check text-gray-500 text-xs"></i>
+                <p>Done Today</p>
+            </div>
             <h3>{{ $stats['today_delivered'] }}</h3>
-            <p>Done Today</p>
         </div>
         <div class="stat-block text-right">
+            <div class="flex items-center gap-2 mb-1 justify-end">
+                <i class="fa-solid fa-triangle-exclamation text-primary-accent text-xs"></i>
+                <p>Delayed</p>
+            </div>
             <h3 class="text-primary-accent">{{ $stats['delayed_count'] }}</h3>
-            <p>Delayed</p>
         </div>
     </div>
 
     <!-- Enhanced Work Report Card -->
     <div class="mx-5 mb-8 p-5 rounded-xl border border-premium bg-gradient-premium relative overflow-hidden group">
-        <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-            <i class="fa-solid fa-chart-line text-6xl text-primary-accent"></i>
-        </div>
-        
         <h3 class="font-display font-bold text-primary-accent text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
-            <i class="fa-solid fa-award"></i> Performance Report
+            <i class="fa-solid fa-chart-line"></i> Performance Report
         </h3>
         
         <div class="grid grid-cols-2 gap-4">
-            <div class="p-4 rounded-lg bg-premium-light border border-premium">
+            <div class="p-4 rounded-lg bg-premium-light border border-premium relative">
+                <i class="fa-solid fa-calendar-day absolute top-4 right-4 text-white/10 text-xl"></i>
                 <div class="text-xs text-gray-400 mb-1 uppercase font-bold tracking-tighter">This Month</div>
                 <div class="text-2xl font-bold text-white">{{ $stats['monthly_delivered'] }} <span class="text-xs font-normal text-gray-500">jobs</span></div>
             </div>
-            <div class="p-4 rounded-lg bg-premium-light border border-premium">
+            <div class="p-4 rounded-lg bg-premium-light border border-premium relative">
+                <i class="fa-solid fa-trophy absolute top-4 right-4 text-white/10 text-xl"></i>
                 <div class="text-xs text-gray-400 mb-1 uppercase font-bold tracking-tighter">All-Time Success</div>
                 <div class="text-2xl font-bold text-white">{{ $stats['total_delivered'] }} <span class="text-xs font-normal text-gray-500">total</span></div>
             </div>
